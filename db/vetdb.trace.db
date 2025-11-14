@@ -1,0 +1,71 @@
+2025-11-13 18:24:09.068463-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: Tipo de dato desconocido : "IDENTITY"
+Unknown data type: "IDENTITY"; SQL statement:
+    CREATE TABLE IF NOT EXISTS clients (
+        id IDENTITY PRIMARY KEY,
+        name      VARCHAR(100) NOT NULL,
+        last_name VARCHAR(100),
+        phone     VARCHAR(20),
+        email     VARCHAR(100),
+        dni       VARCHAR(20) NOT NULL UNIQUE
+    )
+ [50004-224]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:566)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.command.Parser.readIfDataType1(Parser.java:5866)
+	at org.h2.command.Parser.readIfDataType(Parser.java:5704)
+	at org.h2.command.Parser.parseColumnWithType(Parser.java:5686)
+	at org.h2.command.Parser.parseColumnForTable(Parser.java:5565)
+	at org.h2.command.Parser.parseTableColumnDefinition(Parser.java:8999)
+	at org.h2.command.Parser.parseCreateTable(Parser.java:8939)
+	at org.h2.command.Parser.parseCreate(Parser.java:6404)
+	at org.h2.command.Parser.parsePrepared(Parser.java:666)
+	at org.h2.command.Parser.parse(Parser.java:592)
+	at org.h2.command.Parser.parse(Parser.java:564)
+	at org.h2.command.Parser.prepareCommand(Parser.java:483)
+	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:639)
+	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:559)
+	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1166)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:245)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.dhuapaya.sistemaveterinaria@1.0-SNAPSHOT/com.dhuapaya.sistemaveterinaria.db.H2.initDatabase(H2.java:44)
+	at com.dhuapaya.sistemaveterinaria@1.0-SNAPSHOT/com.dhuapaya.sistemaveterinaria.db.H2.<clinit>(H2.java:24)
+	at com.dhuapaya.sistemaveterinaria@1.0-SNAPSHOT/com.dhuapaya.sistemaveterinaria.dao.ClientDao.listAll(ClientDao.java:40)
+	at com.dhuapaya.sistemaveterinaria@1.0-SNAPSHOT/com.dhuapaya.sistemaveterinaria.MainController.refreshClientCombo(MainController.java:89)
+	at com.dhuapaya.sistemaveterinaria@1.0-SNAPSHOT/com.dhuapaya.sistemaveterinaria.MainController.initialize(MainController.java:194)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:77)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at javafx.base/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:275)
+	at javafx.fxml/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2680)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:2555)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3368)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3324)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3292)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3264)
+	at javafx.fxml/javafx.fxml.FXMLLoader.loadImpl(FXMLLoader.java:3240)
+	at javafx.fxml/javafx.fxml.FXMLLoader.load(FXMLLoader.java:3233)
+	at com.dhuapaya.sistemaveterinaria@1.0-SNAPSHOT/com.dhuapaya.sistemaveterinaria.App.start(App.java:12)
+	at javafx.graphics/com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$9(LauncherImpl.java:847)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runAndWait$12(PlatformImpl.java:484)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$10(PlatformImpl.java:457)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:138)
+	at javafx.graphics/com.sun.javafx.application.PlatformImpl.lambda$runLater$11(PlatformImpl.java:456)
+	at javafx.graphics/com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:96)
+2025-11-13 18:24:09.111327-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "clients" not found (this database is empty); SQL statement:
+SELECT id, name, last_name, phone, email, dni FROM clients ORDER BY id DESC [42104-224]
+2025-11-13 18:24:09.156845-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "clients" not found (this database is empty); SQL statement:
+SELECT id, name, last_name, phone, email, dni FROM clients ORDER BY id DESC [42104-224]
+2025-11-13 18:24:09.260843-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "pets" not found (this database is empty); SQL statement:
+SELECT id, client_id, name, species, breed, birthdate FROM pets ORDER BY id DESC [42104-224]
+2025-11-13 18:24:09.393962-05:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "appointments" not found (this database is empty); SQL statement:
+SELECT id, pet_id, date_time, reason, notes, status FROM appointments ORDER BY date_time DESC [42104-224]

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.dhuapaya.sistemaveterinaria.MainController" stylesheets="@style.css">
+    <center>
+        <TabPane fx:id="tabPane">
+            <!-- CLIENTES -->
+            <Tab text="Clientes">
+                <BorderPane>
+                    <top>
+                        <GridPane hgap="8" vgap="8">
+                            <padding>
+                                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+                            </padding>
+                            <children>
+                                <Label text="ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="c_id" editable="false" GridPane.rowIndex="0"
+                                           GridPane.columnIndex="1"/>
+                                <Label text="Nombre:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <TextField fx:id="c_name" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                                <Label text="Apellido:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                                <TextField fx:id="c_lastName" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+                                <Label text="Teléfono:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <TextField fx:id="c_phone" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Label text="Email:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                                <TextField fx:id="c_email" GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+                                <Label text="DNI:" GridPane.rowIndex="2" GridPane.columnIndex="4"/>
+                                <TextField fx:id="c_dni" GridPane.rowIndex="2" GridPane.columnIndex="5"/>
+                                <HBox spacing="10" alignment="CENTER" GridPane.rowIndex="3" GridPane.columnIndex="0"
+                                      GridPane.columnSpan="4">
+                                    <Button text="Nuevo" onAction="#onClientNew"/>
+                                    <Button text="Guardar" onAction="#onClientCreate"/>
+                                    <Button text="Actualizar" onAction="#onClientUpdate"/>
+                                    <Button text="Eliminar" onAction="#onClientDelete"/>
+                                    <Button text="Recargar" onAction="#onClientReload"/>
+                                </HBox>
+                            </children>
+                        </GridPane>
+                    </top>
+                    <center>
+                        <TableView fx:id="tblClients">
+                            <columns>
+                                <TableColumn text="ID" fx:id="colCId" prefWidth="50"/>
+                                <TableColumn text="Nombre" fx:id="colCName" prefWidth="150"/>
+                                <TableColumn text="Apellido" fx:id="colCLastName" prefWidth="150"/>
+                                <TableColumn text="Teléfono" fx:id="colCPhone" prefWidth="100"/>
+                                <TableColumn text="Email" fx:id="colCEmail" prefWidth="200"/>
+                                <TableColumn text="DNI" fx:id="colCDni" prefWidth="200"/>
+                            </columns>
+                        </TableView>
+                    </center>
+                </BorderPane>
+            </Tab>
+
+            <!-- MASCOTAS -->
+            <Tab text="Mascotas">
+                <BorderPane>
+                    <top>
+                        <GridPane hgap="8" vgap="8">
+                            <padding>
+                                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+                            </padding>
+                            <children>
+                                <Label text="ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="p_id" editable="false" GridPane.rowIndex="0"
+                                           GridPane.columnIndex="1"/>
+                                <Label text="Cliente:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="p_clientCombo" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                          prefWidth="200.0"/>
+                                <Label text="Nombre:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                                <TextField fx:id="p_name" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                                <Label text="Especie:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                                <ComboBox fx:id="p_speciesCombo" GridPane.rowIndex="1" GridPane.columnIndex="3"
+                                          prefWidth="200.0"/>
+                                <Label text="Raza:" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                                <ComboBox fx:id="p_breedCombo" GridPane.rowIndex="2" GridPane.columnIndex="3"
+                                          prefWidth="200.0"/>
+                                <Label text="Nacimiento:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <DatePicker fx:id="p_birthDate" GridPane.rowIndex="2" GridPane.columnIndex="1"
+                                            prefWidth="200.0"/>
+                                <HBox spacing="8" GridPane.rowIndex="3" GridPane.columnIndex="1"
+                                      GridPane.columnSpan="3">
+                                    <Button text="Nuevo" onAction="#onPetNew"/>
+                                    <Button text="Guardar" onAction="#onPetCreate"/>
+                                    <Button text="Actualizar" onAction="#onPetUpdate"/>
+                                    <Button text="Eliminar" onAction="#onPetDelete"/>
+                                    <Button text="Recargar" onAction="#onPetReload"/>
+                                </HBox>
+                            </children>
+                        </GridPane>
+                    </top>
+                    <center>
+                        <TableView fx:id="tblPets">
+                            <columns>
+                                <TableColumn text="ID" fx:id="colPId" prefWidth="60"/>
+                                <TableColumn text="Cliente" fx:id="colPClient" prefWidth="200"/>
+                                <TableColumn text="Nombre" fx:id="colPName" prefWidth="160"/>
+                                <TableColumn text="Especie" fx:id="colPSpecies" prefWidth="120"/>
+                                <TableColumn text="Raza" fx:id="colPBreed" prefWidth="120"/>
+                                <TableColumn text="Nacimiento" fx:id="colPBirth" prefWidth="120"/>
+                            </columns>
+                        </TableView>
+                    </center>
+                </BorderPane>
+            </Tab>
+
+            <!-- CITAS -->
+            <Tab text="Citas">
+                <BorderPane>
+                    <top>
+                        <GridPane hgap="8" vgap="8">
+                            <padding>
+                                <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
+                            </padding>
+                            <children>
+                                <Label text="ID:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                                <TextField fx:id="a_id" editable="false" GridPane.rowIndex="0"
+                                           GridPane.columnIndex="1"/>
+
+                                <!-- 🔽 Antes aquí estaba a_petId como TextField -->
+                                <Label text="Mascota:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="a_petCombo" GridPane.rowIndex="1" GridPane.columnIndex="1"
+                                          prefWidth="220.0"/>
+
+                                <Label text="Fecha:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                                <DatePicker fx:id="a_date" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                                <Label text="Hora (HH:mm):" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
+                                <TextField fx:id="a_time" promptText="HH:mm"
+                                           GridPane.rowIndex="2" GridPane.columnIndex="3"/>
+
+                                <Label text="Motivo:" GridPane.rowIndex="0" GridPane.columnIndex="2"/>
+                                <TextField fx:id="a_reason" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
+                                <Label text="Notas:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+                                <TextField fx:id="a_notes" GridPane.rowIndex="1" GridPane.columnIndex="3"/>
+
+                                <Label text="Estado:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                                <ComboBox fx:id="a_status" GridPane.rowIndex="3" GridPane.columnIndex="1">
+                                    <items>
+                                        <FXCollections fx:factory="observableArrayList">
+                                            <String fx:value="PENDIENTE"/>
+                                            <String fx:value="CONFIRMADO"/>
+                                            <String fx:value="CANCELADO"/>
+                                        </FXCollections>
+                                    </items>
+                                </ComboBox>
+
+                                <HBox spacing="8" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                                      GridPane.columnSpan="3">
+                                    <Button text="Nuevo" onAction="#onApptNew"/>
+                                    <Button text="Guardar" onAction="#onApptCreate"/>
+                                    <Button text="Actualizar" onAction="#onApptUpdate"/>
+                                    <Button text="Eliminar" onAction="#onApptDelete"/>
+                                    <Button text="Recargar" onAction="#onApptReload"/>
+                                </HBox>
+                            </children>
+                        </GridPane>
+                    </top>
+                    <center>
+                        <TableView fx:id="tblAppts">
+                            <columns>
+                                <TableColumn text="ID" fx:id="colAId" prefWidth="60"/>
+                                <TableColumn text="Mascota (ID)" fx:id="colAPet" prefWidth="80"/>
+                                <TableColumn text="FechaHora" fx:id="colADT" prefWidth="160"/>
+                                <TableColumn text="Motivo" fx:id="colAReason" prefWidth="160"/>
+                                <TableColumn text="Notas" fx:id="colANotes" prefWidth="160"/>
+                                <TableColumn text="Estado" fx:id="colAStatus" prefWidth="100"/>
+                            </columns>
+                        </TableView>
+                    </center>
+                </BorderPane>
+            </Tab>
+        </TabPane>
+    </center>
+    <bottom>
+        <Label fx:id="lblStatus" style="-fx-padding:8;"/>
+    </bottom>
+</BorderPane>
