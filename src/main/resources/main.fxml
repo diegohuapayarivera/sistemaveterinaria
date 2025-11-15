@@ -37,6 +37,7 @@
                                     <Button text="Actualizar" onAction="#onClientUpdate"/>
                                     <Button text="Eliminar" onAction="#onClientDelete"/>
                                     <Button text="Recargar" onAction="#onClientReload"/>
+                                    <Button text="Exportar CSV" onAction="#onExportClientsCsv"/>
                                 </HBox>
                             </children>
                         </GridPane>
@@ -89,6 +90,7 @@
                                     <Button text="Actualizar" onAction="#onPetUpdate"/>
                                     <Button text="Eliminar" onAction="#onPetDelete"/>
                                     <Button text="Recargar" onAction="#onPetReload"/>
+                                    <Button text="Exportar CSV" onAction="#onExportPetsCsv"/>
                                 </HBox>
                             </children>
                         </GridPane>
@@ -155,6 +157,7 @@
                                     <Button text="Actualizar" onAction="#onApptUpdate"/>
                                     <Button text="Eliminar" onAction="#onApptDelete"/>
                                     <Button text="Recargar" onAction="#onApptReload"/>
+                                    <Button text="Exportar CSV" onAction="#onExportAppointmentsCsv"/>
                                 </HBox>
                             </children>
                         </GridPane>

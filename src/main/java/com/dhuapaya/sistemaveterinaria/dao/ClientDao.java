@@ -3,6 +3,8 @@ package com.dhuapaya.sistemaveterinaria.dao;
 import com.dhuapaya.sistemaveterinaria.db.H2;
 import com.dhuapaya.sistemaveterinaria.model.Client;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -100,5 +102,27 @@ public class ClientDao implements CrudDao<Client> {
             }
         }
         return true;
+    }
+
+    public void exportToCsv(String filePath) throws Exception {
+        String sql = "SELECT name, last_name, phone, email, dni FROM clients";
+        try (Connection cn = H2.get();
+             PreparedStatement ps = cn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery();
+             PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+
+            // Escribir encabezados
+            writer.println("Nombre,Apellido,Telefono,Email,DNI");
+
+            // Escribir filas
+            while (rs.next()) {
+                writer.printf("%s,%s,%s,%s,%s%n",
+                        rs.getString("name"),
+                        rs.getString("last_name"),
+                        rs.getString("phone"),
+                        rs.getString("email"),
+                        rs.getString("dni"));
+            }
+        }
     }
 }

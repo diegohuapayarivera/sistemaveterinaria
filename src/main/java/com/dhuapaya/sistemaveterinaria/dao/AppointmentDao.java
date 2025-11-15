@@ -3,6 +3,8 @@ package com.dhuapaya.sistemaveterinaria.dao;
 import com.dhuapaya.sistemaveterinaria.db.H2;
 import com.dhuapaya.sistemaveterinaria.model.Appointment;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -136,6 +138,45 @@ public class AppointmentDao implements CrudDao<Appointment> {
                     ));
                 }
                 return out;
+            }
+        }
+    }
+
+
+    public void exportToCsv(String filePath) throws Exception {
+        String sql = """
+        SELECT a.date_time, a.reason, a.notes, a.status,
+               p.name AS pet_name,
+               c.name AS client_name, c.last_name AS client_last_name
+        FROM appointments a
+        JOIN pets p ON a.pet_id = p.id
+        JOIN clients c ON p.client_id = c.id
+    """;
+
+        try (Connection cn = H2.get();
+             PreparedStatement ps = cn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery();
+             PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+
+            // Escribir encabezados
+            writer.println("Fecha y Hora,Razon,Notas,Estado,Mascota,Cliente");
+
+            // Escribir filas
+            while (rs.next()) {
+                String dateTime = rs.getTimestamp("date_time").toLocalDateTime().toString();
+                String reason = rs.getString("reason");
+                String notes = rs.getString("notes");
+                String status = rs.getString("status");
+                String petName = rs.getString("pet_name");
+                String clientFullName = rs.getString("client_name") + " " + rs.getString("client_last_name");
+
+                writer.printf("%s,%s,%s,%s,%s,%s%n",
+                        dateTime,
+                        reason,
+                        notes,
+                        status,
+                        petName,
+                        clientFullName);
             }
         }
     }
