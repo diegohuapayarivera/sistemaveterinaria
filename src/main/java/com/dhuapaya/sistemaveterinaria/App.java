@@ -9,7 +9,7 @@ import java.util.Objects;
 public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/main.fxml"))));
+        Scene scene = new Scene(FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/login.fxml"))));
         stage.setTitle("Veterinaria - CRUD");
         stage.setScene(scene);
         stage.show();

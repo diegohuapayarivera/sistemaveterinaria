@@ -6,8 +6,13 @@
 <?import java.lang.String?>
 <BorderPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.dhuapaya.sistemaveterinaria.MainController" stylesheets="@style.css">
+    <top>
+        <HBox spacing="10" alignment="CENTER" styleClass="header">
+            <Label text="Sistema de Gestión Veterinaria" styleClass="header-title"/>
+        </HBox>
+    </top>
     <center>
-        <TabPane fx:id="tabPane">
+        <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE" styleClass="tab-pane">
             <!-- CLIENTES -->
             <Tab text="Clientes">
                 <BorderPane>
@@ -179,6 +184,8 @@
         </TabPane>
     </center>
     <bottom>
-        <Label fx:id="lblStatus" style="-fx-padding:8;"/>
+        <HBox spacing="10" alignment="CENTER" styleClass="footer">
+            <Label fx:id="lblStatus" styleClass="footer-label"/>
+        </HBox>
     </bottom>
 </BorderPane>
