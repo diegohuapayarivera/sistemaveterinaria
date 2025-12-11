@@ -3,6 +3,8 @@ package com.dhuapaya.sistemaveterinaria.dao;
 import com.dhuapaya.sistemaveterinaria.db.H2;
 import com.dhuapaya.sistemaveterinaria.model.Pet;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -91,6 +93,41 @@ public class PetDao implements CrudDao<Pet> {
 
             ps.setInt(1, id);
             ps.executeUpdate();
+        }
+    }
+
+
+    public void exportToCsv(String filePath) throws Exception {
+        String sql = """
+        SELECT p.name AS pet_name, p.species, p.breed, p.birthdate, 
+               c.name AS client_name, c.last_name AS client_last_name
+        FROM pets p
+        JOIN clients c ON p.client_id = c.id
+    """;
+
+        try (Connection cn = H2.get();
+             PreparedStatement ps = cn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery();
+             PrintWriter writer = new PrintWriter(new FileWriter(filePath))) {
+
+            // Escribir encabezados
+            writer.println("Mascota,Especie,Raza,Fecha de Nacimiento,Cliente");
+
+            // Escribir filas
+            while (rs.next()) {
+                String petName = rs.getString("pet_name");
+                String species = rs.getString("species");
+                String breed = rs.getString("breed");
+                Date birthdate = rs.getDate("birthdate");
+                String clientFullName = rs.getString("client_name") + " " + rs.getString("client_last_name");
+
+                writer.printf("%s,%s,%s,%s,%s%n",
+                        petName,
+                        species,
+                        breed,
+                        (birthdate != null ? birthdate.toString() : ""),
+                        clientFullName);
+            }
         }
     }
 }

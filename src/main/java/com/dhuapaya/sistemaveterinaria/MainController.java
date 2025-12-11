@@ -17,8 +17,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.util.StringConverter;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -405,6 +407,24 @@ public class MainController {
         }
     }
 
+
+    public void onExportClientsCsv() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar reporte de Clientes");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV", "*.csv"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                new ClientDao().exportToCsv(file.getAbsolutePath());
+                lblStatus.setText("Reporte de clientes exportado correctamente.");
+            } catch (Exception e) {
+                lblStatus.setText("Error al exportar el reporte de clientes.");
+                e.printStackTrace();
+            }
+        }
+    }
+
     // MASCOTA
     @FXML
     public void onPetNew() {
@@ -527,6 +547,23 @@ public class MainController {
             ErrorHandler.showError(lblStatus, e, "Error cargando mascotas");
         } finally {
             updatingPetsUI = false;
+        }
+    }
+
+    public void onExportPetsCsv() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar reporte de Mascotas");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV", "*.csv"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                new PetDao().exportToCsv(file.getAbsolutePath());
+                lblStatus.setText("Reporte de mascotas exportado correctamente.");
+            } catch (Exception e) {
+                lblStatus.setText("Error al exportar el reporte de mascotas.");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -691,6 +728,24 @@ public class MainController {
 
         } catch (Exception e) {
             ErrorHandler.showError(lblStatus, e, "Error consultando citas");
+        }
+    }
+
+    @FXML
+    public void onExportAppointmentsCsv() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar reporte de Citas");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos CSV", "*.csv"));
+        File file = fileChooser.showSaveDialog(null);
+
+        if (file != null) {
+            try {
+                apptDao.exportToCsv(file.getAbsolutePath());
+                lblStatus.setText("Reporte de citas exportado correctamente.");
+            } catch (Exception e) {
+                lblStatus.setText("Error al exportar el reporte de citas.");
+                e.printStackTrace();
+            }
         }
     }
 }
